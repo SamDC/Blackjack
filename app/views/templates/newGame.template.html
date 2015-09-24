@@ -1,0 +1,38 @@
+<md-dialog aria-label="New Game">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>New Game</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="material-icons md-36 primary-color">close</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+            <div>
+                <p>
+                    Welcome! Select the number of players, name them, and then join the table...
+                </p>
+                <md-input-container>
+                    <label>Players</label>
+                        <input required type="number" step="1" name="players" ng-model="playersCounter.count" min="1" max="6">
+                </md-input-container>
+                
+                <div flex ng-repeat="player in players">
+                    <md-input-container flex>
+                        <label>Player {{player.id}}</label>
+                        <input ng-model="player.name">
+                    </md-input-container>
+                </div>
+                
+            </div>
+        </md-dialog-content>
+
+        <div ng-show="playersCount > 0" class="md-actions" layout="row">
+            <md-button ng-click="answer(players)" style="margin-right:20px;" >
+              Play
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

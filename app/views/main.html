@@ -1,0 +1,15 @@
+<section>
+    <div ng-show="inProgress" layout="column" layout-align="center center">
+        <h1 class=".md-display-3">{{players[playerCounter].name}}</h1>
+        <h1 class=".md-display-3">{{players[playerCounter].score}}</h1>
+        <div layout="row">
+            <md-button ng-click="HitMeClick()" style="margin-right:20px;" >
+                  Hit me
+            </md-button>
+            <md-button ng-click="Stick()" style="margin-right:20px;" >
+                  Stick
+            </md-button>
+        </div>
+    </div>
+    
+</section>
