@@ -63,7 +63,7 @@ function DialogController($scope, $mdDialog) {
         function( newValue, oldValue ) {
             if(newValue != undefined) {
                 if(newValue.count > $scope.playersCount) {
-                    $scope.players.push({id: newValue.count,name: 'Player ' + newValue.count, score: 0, hand: []});
+                    $scope.players.push({id: newValue.count, name: 'Player ' + newValue.count, score: 0, hand: []});
                     $scope.playersCount++;
                 }
                 else {

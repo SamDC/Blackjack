@@ -47,6 +47,11 @@ function Shuffle(array) {
   return array;
 }
 
+function CardDisplay(value) {
+    
+    return value === 1 ? 'A' : value === 11 ? 'J' : value === 12 ? 'Q' : value === 13 ? 'K' : value.toString();
+}
+
 //Build the deck and return an array of cards.
 function BuildNewDeck() {
     
@@ -54,10 +59,10 @@ function BuildNewDeck() {
     
     //Construct 52 cards with suits. jacks 11, queens, 12, kings 13.
     for(var i = 1; i <= 13; i++) {
-        deck.push({suit: 'S', actual: i, value: i > 10 ? 10 : i }); //spades
-        deck.push({suit: 'C', actual: i, value: i > 10 ? 10 : i }); //clubs
-        deck.push({suit: 'H', actual: i, value: i > 10 ? 10 : i }); //hearts
-        deck.push({suit: 'D', actual: i, value: i > 10 ? 10 : i }); //diamonds
+        deck.push({suit: 'S', image:'../images/spade.png', actual: CardDisplay(i), value: i > 10 ? 10 : i }); //spades
+        deck.push({suit: 'C', image:'../images/club.png', actual: CardDisplay(i), value: i > 10 ? 10 : i }); //clubs
+        deck.push({suit: 'H', image:'../images/spade.png', actual: CardDisplay(i), value: i > 10 ? 10 : i }); //hearts
+        deck.push({suit: 'D', image:'../images/diamond.png', actual: CardDisplay(i), value: i > 10 ? 10 : i }); //diamonds
     }
     
     return deck;

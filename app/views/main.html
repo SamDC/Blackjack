@@ -1,6 +1,20 @@
 <section>
     <div ng-show="inProgress" layout="column" layout-align="center center">
         <h1 class=".md-display-3">{{players[playerCounter].name}}</h1>
+        <div layout="row">
+            <div flex ng-repeat="hand in players[playerCounter].hand">
+                <md-whiteframe class="md-whiteframe-z1 card" layout="column" layout-align="center center">
+                    <div>
+                        <div class="card-container">
+                            <h1 class="md-display-2 no-margin">{{hand.actual}}</h1>
+                        </div>
+                        <div class="card-container" flex>
+                            <img class="suit-image" ng-src="{{hand.image}}">
+                        </div>
+                    </div>
+                </md-whiteframe>
+            </div>
+        </div>
         <h1 class=".md-display-3">{{players[playerCounter].score}}</h1>
         <div layout="row">
             <md-button ng-click="HitMeClick()" style="margin-right:20px;" >
