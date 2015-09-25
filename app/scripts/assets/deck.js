@@ -9,20 +9,54 @@ function Deal(players, callback) {
     {
         //Would need some handling incase out of cards, maybe new deck - leave for now to get other bits done.
         players.forEach(function(player) {
+            
             player.hand.push(playingDeck[playingDeck.length - 1]);
-            player.score = player.score + playingDeck[playingDeck.length - 1].value
+            var ace = playingDeck[playingDeck.length - 1].value === 1 ? true : false;
+            
+            player.score = player.score + (ace === true ? 11 : playingDeck[playingDeck.length - 1].value)
             playingDeck.pop();
+            
+            if(ace)
+                player.aces = player.aces + 1;
+            
+            if(player.score === 21)
+                player.blackjack = true;
         });
     }
     
     callback(players);
 }
 
+function CheckBust(player) {
+    
+    console.log(player);
+    
+    if(player.score > 21) {
+        if(player.aces > 0) {
+            for(var i = 0; i < player.aces; i++) {
+                player.score = player.score - 10;
+                if(player.score > 21) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    return false;
+}
+
 //Get card(s) from deck and then remove them from the deck array - return a hand.
 function HitMe(player, callback) {
     
     player.hand.push(playingDeck[playingDeck.length - 1]);
-    player.score = player.score + playingDeck[playingDeck.length - 1].value
+    var ace = playingDeck[playingDeck.length - 1].value === 1 ? true : false;
+    
+    if(ace)
+        player.aces = player.aces + 1;
+            
+    player.score = player.score + (ace === true ? 11 : playingDeck[playingDeck.length - 1].value);
+    player.bust = CheckBust(player);
     playingDeck.pop();
     
     callback(player);

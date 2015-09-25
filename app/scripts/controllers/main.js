@@ -13,6 +13,7 @@ angular.module('blackjackApp')
     $scope.players;
     $scope.playerCounter = 0;
     $scope.inProgress = false;
+    $scope.score =  [];
     
     $mdDialog.show({
       controller: DialogController,
@@ -22,7 +23,7 @@ angular.module('blackjackApp')
     })
     .then(function(answer) {
         $scope.players = answer;
-        $scope.players.push({id: answer.length + 1, name: 'Dealer', score: 0, hand: []});
+        $scope.players.push({id: answer.length + 1, name: 'Dealer', score: 0, hand: [], blackjack: false, bust: false, aces: 0});
         Play();
     }, function() {
         $scope.status = 'You cancelled the dialog.';
@@ -48,7 +49,8 @@ angular.module('blackjackApp')
         });
     }
     
-    $scope.Stick = function() {
+    $scope.Stick = function(player) {
+        $scope.score.push({name: player.name, score: player.score});
         $scope.playerCounter++;
     }
 });
@@ -63,7 +65,7 @@ function DialogController($scope, $mdDialog) {
         function( newValue, oldValue ) {
             if(newValue != undefined) {
                 if(newValue.count > $scope.playersCount) {
-                    $scope.players.push({id: newValue.count, name: 'Player ' + newValue.count, score: 0, hand: []});
+                    $scope.players.push({id: newValue.count, name: 'Player ' + newValue.count, score: 0, hand: [], blackjack: false, bust: false, aces: 0});
                     $scope.playersCount++;
                 }
                 else {
