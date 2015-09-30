@@ -10,6 +10,8 @@
 angular.module('blackjackApp')
   .controller('MainCtrl', function ($scope, $mdDialog) {
     
+    var topScore = 0;
+    
     $scope.players;
     $scope.playerCounter = 0;
     $scope.inProgress = false;
@@ -43,6 +45,18 @@ angular.module('blackjackApp')
         }); 
     }
     
+    function ResetPlayers() {
+        
+        $scope.players.forEach(function(player) {
+            player. score = 0;
+            player.hand = [];
+            player.aces = 0;
+            player. blackjack = false;
+            player.bust = false;
+        });
+        $scope.score = [];
+    }
+    
     $scope.HitMeClick = function() {
         HitMe($scope.players[$scope.playerCounter], function(player){
             $scope.players[$scope.playerCounter] = player;
@@ -51,7 +65,25 @@ angular.module('blackjackApp')
     
     $scope.Stick = function(player) {
         $scope.score.push({name: player.name, score: player.score});
+        topScore = player.score <= 21 ? (topScore < player.score ? player.score : topScore) : topScore;
         $scope.playerCounter++;
+        if($scope.playerCounter === $scope.players.length - 1) {
+            DealerPlay($scope.players[$scope.playerCounter], topScore, function(winner) {
+                
+            });
+        }
+    }
+    
+    $scope.Next = function(player) {
+        $scope.score.push({name: player.name, score: player.score});
+        console.log($scope.playerCounter + ' ' + $scope.players.length);
+        if($scope.playerCounter === $scope.players.length - 1) {
+            ResetPlayers();
+            $scope.playerCounter = 0;
+            Play();
+        } else {
+            $scope.playerCounter++;
+        }
     }
 });
 

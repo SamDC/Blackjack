@@ -62,6 +62,10 @@ function HitMe(player, callback) {
     callback(player);
 }
 
+function DealerPlay(player, topScore, callback) {
+    
+}
+
 //Fisher-Yates shuffle. I took this from http://bost.ocks.org/mike/shuffle/
 function Shuffle(array) {
   var m = array.length, t, i;

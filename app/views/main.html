@@ -23,11 +23,14 @@
         <h1 class="md-display-3">{{players[playerCounter].score}}</h1>
         <h1 ng-show="players[playerCounter].bust" class="md-display-3">BUST!</h1>
         <div layout="row">
-            <md-button ng-click="HitMeClick()" style="margin-right:20px;" >
+            <md-button ng-hide="players[playerCounter].bust" ng-click="HitMeClick()" style="margin-right:20px;" >
                   Hit me
             </md-button>
             <md-button ng-click="Stick(players[playerCounter])" style="margin-right:20px;" >
                   Stick
+            </md-button>
+            <md-button ng-show="players[playerCounter].bust" ng-click="Next(players[playerCounter])" style="margin-right:20px;" >
+                  Next
             </md-button>
         </div>
     </div>
