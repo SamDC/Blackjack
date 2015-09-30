@@ -7,6 +7,8 @@ version 0.12.1.
 
 Run `grunt` for building and `grunt serve` for preview.
 
-## Testing
+## Notes
 
-Running `grunt test` will run the unit tests with karma.
+- Aces not completley handled correctly yet.
+- UI styling not completed.
+- Dealer automation not implemented, but logic there to support it.
